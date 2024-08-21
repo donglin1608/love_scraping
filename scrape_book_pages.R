@@ -50,3 +50,4 @@ book_data_df <- do.call(rbind, book_data)
 
 # View the scraped data
 print(book_data_df)
+
