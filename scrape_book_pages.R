@@ -1,5 +1,6 @@
 
 library(rvest)
+library(writexl)
 
 base_url <- "https://books.toscrape.com/catalogue/page-"
 book_data <- list()
@@ -49,5 +50,7 @@ for (i in 1:5) {
 book_data_df <- do.call(rbind, book_data)
 
 # View the scraped data
-print(book_data_df)
+#print(book_data_df)
 
+# Save the data frame as an Excel file
+write_xlsx(book_data_df, "book_data.xlsx")
