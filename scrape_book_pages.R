@@ -1,6 +1,7 @@
 
 library(rvest)
-library(writexl)
+library(knitr)
+library(kableExtra)
 
 base_url <- "https://books.toscrape.com/catalogue/page-"
 book_data <- list()
@@ -52,5 +53,17 @@ book_data_df <- do.call(rbind, book_data)
 # View the scraped data
 #print(book_data_df)
 
-# Save the data frame as an Excel file
-write_xlsx(book_data_df, "book_data.xlsx")
+# Save the data frame as a CSV file
+write.csv(book_data_df, "book_data.csv", row.names = FALSE)
+
+# Load the CSV file
+book_data <- read.csv("book_data.csv")
+
+# Create an HTML table
+book_table <- kable(book_data, format = "html") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"))
+
+# Save the HTML table
+writeLines(book_table, "book_data.html")
+
+
